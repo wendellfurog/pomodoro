@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 
 export default function Pomodoro() {
-  const [minutes, setMinutes] = useState(0);
+  const [minutes, setMinutes] = useState(24);
   const [seconds, setSeconds] = useState(0);
   const [start, setStart] = useState(false);
   const [displayMessage, setDisplayMessage] = useState(false);
@@ -12,15 +12,15 @@ export default function Pomodoro() {
       clearInterval(interval);
 
       if(seconds === 0) {
-        if(minutes !==0) {
+        if(minutes > 0) {
           setSeconds(59);
           setMinutes(minutes-1);
         } else {
-          let minutes = displayMessage ? minutes-1 : 4;
+          let minute = displayMessage ? minutes-1 : 4;
           let seconds = 59;
 
           setSeconds(seconds);
-          setMinutes(minutes);
+          setMinutes(minute);
           setDisplayMessage(!displayMessage);
         }
       } else {
@@ -46,7 +46,7 @@ export default function Pomodoro() {
           </button>
         </div>
         <div>
-          <input className='duration' type='number' value={minutes} placeholder='Input duration' onChange={handleChange} />
+          <input className='duration' type='number' placeholder='Input duration' onChange={handleChange} />
         </div>
       </div>
       }
